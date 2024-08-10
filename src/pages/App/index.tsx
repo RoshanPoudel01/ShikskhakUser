@@ -9,6 +9,7 @@ import {
 import { useFetchInitData } from "@shikshak/services/service-init";
 import { Suspense, lazy, useEffect } from "react";
 import { Navigate, Outlet, Route, Routes } from "react-router-dom";
+import Home from "../NoAuth/Home";
 import Register from "../NoAuth/Register";
 import { appRoutes } from "./appRoutes";
 import { NAVIGATION_ROUTES } from "./navigationRoutes";
@@ -120,7 +121,7 @@ export default function App() {
             </>
           ) : (
             <Route path="/" element={<Outlet />}>
-              <Route index element={<Login />} />
+              <Route index element={<Home />} />
               <Route path={NAVIGATION_ROUTES.REGISTER} element={<Register />} />
               <Route path={NAVIGATION_ROUTES.LOGIN} element={<Login />} />
               <Route path="*" element={<MissingRoute />} />
