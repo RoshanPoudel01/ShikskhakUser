@@ -8,7 +8,7 @@ import {
   SimpleGrid,
   Text
 } from "@chakra-ui/react";
-import { learnEaseData } from "./data";
+import { ShikshakData } from "./data";
 
 const Section4 = () => {
   return (
@@ -22,7 +22,7 @@ const Section4 = () => {
         <Text color={"#2F327D"} as={"span"}>
           What is{" "}
         </Text>
-        LearnEase?
+        Shikshak?
       </Text>
       <Text
         w={{ md: "90%", lg: "80%" }}
@@ -30,10 +30,10 @@ const Section4 = () => {
         textAlign={"center"}
         fontSize={{ base: "16px", md: "20px", xl: "24px" }}
       >
-        LearnEase is an innovative online learning platform designed to make
+        Shikshak is an innovative online learning platform designed to make
         education accessible, engaging, and adaptable to your lifestyle. It
         offers a diverse range of courses taught by experts in various fields.
-        With LearnEase, you can learn at your own pace, interact with fellow
+        With Shikshak, you can learn at your own pace, interact with fellow
         learners, and gain valuable skills through practical and interactive
         lessons.
       </Text>
@@ -42,7 +42,7 @@ const Section4 = () => {
         py={10}
       >
         <SimpleGrid columns={{ base: 1, md: 2 }} spacingX={10} spacingY={4}>
-          {learnEaseData.map((item, index) => (
+          {ShikshakData.map((item, index) => (
             <GridItem key={index} colSpan={1}>
               <Card
                 borderRadius={"40px"}

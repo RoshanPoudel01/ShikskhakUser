@@ -4,21 +4,21 @@ export const profileMenuItems = [
   {
     label: "Manage My Account",
     to: "/profile/",
-    icon: UserIcon,
+    icon: UserIcon
   },
   {
     label: "My Orders",
     to: "/profile/my-orders",
-    icon: PackageCheck,
+    icon: PackageCheck
   },
   {
     label: "My WishList",
     to: "/profile/wishlist",
-    icon: HeartIcon,
+    icon: HeartIcon
   },
   {
     label: "My Reviews",
     to: "/profile/my-reviews",
-    icon: StarIcon,
-  },
+    icon: StarIcon
+  }
 ];

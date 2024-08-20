@@ -107,7 +107,7 @@ function Register() {
 
   return (
     <Flex
-      bg={{ base: "#f2f2f2", md: "" }}
+      bg={{ base: "#E2F5FC", md: "" }}
       minH={window.innerHeight}
       maxW={"100vw"}
       align={"center"}
@@ -115,7 +115,7 @@ function Register() {
     >
       <Container maxW={{ base: "98vw", lg: "90vw", xl: "85vw" }} py={10}>
         <Card shadow={"none"}>
-          <SimpleGrid columns={{ base: 1, md: 2 }} spacing={6}>
+          <SimpleGrid columns={{ base: 1, md: 2 }} spacing={4}>
             <GridItem
               display={{ base: "none", md: "block" }}
               colSpan={1}
@@ -125,7 +125,7 @@ function Register() {
             >
               <Image
                 src={imageAssets.RegisterBanner}
-                alt={"Login Banner"}
+                alt={"Register Banner"}
                 fallback={<Box bg={"gray.100"} w={"100%"} h={"100%"} />}
                 width={"100%"}
                 height={"700px"}
@@ -141,8 +141,8 @@ function Register() {
                 <Flex
                   p={{ base: 4, sm: "40px 40px" }}
                   flexDir={"column"}
-                  bg={"white"}
                   justify={"center"}
+                  gap={4}
                 >
                   <Heading
                     fontSize={{
@@ -153,7 +153,6 @@ function Register() {
                       xl: "24px"
                     }}
                     textAlign={"center"}
-                    mb={8}
                   >
                     Register
                   </Heading>

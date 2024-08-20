@@ -51,124 +51,126 @@ function LoginPage() {
   };
 
   return (
-    <Flex
-      bg={{ base: "#f2f2f2", md: "" }}
-      minH={window.innerHeight}
-      maxW={"100vw"}
-      justify={"center"}
-      align={"center"}
-    >
-      <Container maxW={{ base: "98vw", lg: "90vw", xl: "85vw" }}>
-        <Card shadow={"none"}>
-          <SimpleGrid columns={{ base: 1, md: 2 }} spacing={4}>
-            <GridItem
-              display={{ base: "none", md: "block" }}
-              colSpan={1}
-              bg={"white"}
-              justifySelf={{ md: "start", xl: "center" }}
-              alignContent={"center"}
-            >
-              <Image
-                src={imageAssets.LoginBanner}
-                alt={"Login Banner"}
-                fallback={<Box bg={"gray.100"} w={"100%"} h={"100%"} />}
-              />
-            </GridItem>
-            <GridItem
-              w={{ base: "95%", sm: "80%", md: "90%", xl: "70%" }}
-              justifySelf={"center"}
-              alignSelf={"center"}
-              colSpan={1}
-            >
-              <form onSubmit={handleSubmit(onSubmit)} noValidate>
-                <Flex
-                  p={{ base: 4, sm: "40px 10px" }}
-                  flexDir={"column"}
-                  justify={"center"}
-                  gap={4}
-                >
-                  <Heading
-                    fontSize={{
-                      base: "16px",
-                      sm: "18px",
-                      md: "20px",
-                      lg: "22px",
-                      xl: "24px"
-                    }}
-                    textAlign={"center"}
-                    mb={8}
+    <>
+      <Flex
+        minH={window.innerHeight}
+        maxW={"100vw"}
+        justify={"center"}
+        align={"center"}
+        bg={"#E2F5FC"}
+      >
+        <Container maxW={{ base: "98vw", lg: "90vw", xl: "85vw" }}>
+          <Card shadow={"none"}>
+            <SimpleGrid columns={{ base: 1, md: 2 }} spacing={4}>
+              <GridItem
+                display={{ base: "none", md: "block" }}
+                colSpan={1}
+                bg={"white"}
+                justifySelf={{ md: "start", xl: "center" }}
+                alignContent={"center"}
+              >
+                <Image
+                  src={imageAssets.LoginBanner}
+                  alt={"Login Banner"}
+                  fallback={<Box bg={"gray.100"} w={"100%"} h={"100%"} />}
+                />
+              </GridItem>
+              <GridItem
+                w={{ base: "95%", sm: "80%", md: "90%", xl: "70%" }}
+                justifySelf={"center"}
+                alignSelf={"center"}
+                colSpan={1}
+              >
+                <form onSubmit={handleSubmit(onSubmit)} noValidate>
+                  <Flex
+                    p={{ base: 4, sm: "40px 10px" }}
+                    flexDir={"column"}
+                    justify={"center"}
+                    gap={4}
                   >
-                    Welcome!!!
-                  </Heading>
-                  <Stack gap={6}>
-                    <TextInput
-                      label="Email"
-                      type="text"
-                      name={"email"}
-                      control={control}
-                      startIcon={<AtSignIcon />}
-                      isRequired
-                    />
-                    <TextInput
-                      label="Password"
-                      name={"password"}
-                      type="password"
-                      control={control}
-                      startIcon={<LockIcon />}
-                      isRequired
-                    />
-                  </Stack>
-                  <HStack
-                    justifyContent={"space-between"}
-                    mt={4}
-                    flexWrap={"wrap"}
-                  >
-                    <Checkbox
-                      colorScheme={"primary"}
-                      size={{ base: "sm", md: "md" }}
+                    <Heading
+                      fontSize={{
+                        base: "16px",
+                        sm: "18px",
+                        md: "20px",
+                        lg: "22px",
+                        xl: "24px"
+                      }}
+                      textAlign={"center"}
+                      mb={8}
                     >
-                      <Text fontSize={{ base: "14px", sm: "16px" }}>
-                        Remember me
-                      </Text>
-                    </Checkbox>
+                      Welcome!!!
+                    </Heading>
+                    <Stack gap={6}>
+                      <TextInput
+                        label="Email"
+                        type="text"
+                        name={"email"}
+                        control={control}
+                        startIcon={<AtSignIcon />}
+                        isRequired
+                      />
+                      <TextInput
+                        label="Password"
+                        name={"password"}
+                        type="password"
+                        control={control}
+                        startIcon={<LockIcon />}
+                        isRequired
+                      />
+                    </Stack>
+                    <HStack
+                      justifyContent={"space-between"}
+                      mt={4}
+                      flexWrap={"wrap"}
+                    >
+                      <Checkbox
+                        colorScheme={"primary"}
+                        size={{ base: "sm", md: "md" }}
+                      >
+                        <Text fontSize={{ base: "14px", sm: "16px" }}>
+                          Remember me
+                        </Text>
+                      </Checkbox>
+                      <ChakraLink
+                        as={Link}
+                        size={"lg"}
+                        to="/reset-password"
+                        color={"primary.500"}
+                        mt={2}
+                        fontSize={{ base: "14px", sm: "16px" }}
+                      >
+                        Forgot Password?
+                      </ChakraLink>
+                    </HStack>
+                    <Button
+                      type="submit"
+                      colorScheme="primary"
+                      w={"100%"}
+                      mt={8}
+                      size={{ base: "sm", md: "md" }}
+                      isLoading={isPending}
+                    >
+                      Log In
+                    </Button>
                     <ChakraLink
                       as={Link}
-                      size={"lg"}
-                      to="/reset-password"
+                      to="/register"
                       color={"primary.500"}
-                      mt={2}
+                      mt={4}
                       fontSize={{ base: "14px", sm: "16px" }}
+                      textAlign={"center"}
                     >
-                      Forgot Password?
+                      {" Don't have an account? Register"}
                     </ChakraLink>
-                  </HStack>
-                  <Button
-                    type="submit"
-                    colorScheme="primary"
-                    w={"100%"}
-                    mt={8}
-                    size={{ base: "sm", md: "md" }}
-                    isLoading={isPending}
-                  >
-                    Log In
-                  </Button>
-                  <ChakraLink
-                    as={Link}
-                    to="/register"
-                    color={"primary.500"}
-                    mt={4}
-                    fontSize={{ base: "14px", sm: "16px" }}
-                    textAlign={"center"}
-                  >
-                    {" Don't have an account? Register"}
-                  </ChakraLink>
-                </Flex>
-              </form>
-            </GridItem>
-          </SimpleGrid>
-        </Card>
-      </Container>
-    </Flex>
+                  </Flex>
+                </form>
+              </GridItem>
+            </SimpleGrid>
+          </Card>
+        </Container>
+      </Flex>
+    </>
   );
 }
 

@@ -26,7 +26,7 @@ export const allInOneData = [
   }
 ];
 
-export const learnEaseData = [
+export const ShikshakData = [
   {
     id: 1,
     heading: "For Instructors",

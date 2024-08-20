@@ -1,12 +1,12 @@
 import { Box, Flex, Spinner } from "@chakra-ui/react";
+import Navbar from "@shikshak/pages/NoAuth/Home/Navbar";
 import { Suspense } from "react";
 import { Outlet } from "react-router-dom";
-import NavBar from "../Navbar";
 
 function NoAuthWrapper() {
   return (
     <Flex flexDir={"column"} overflow={"hidden"}>
-      <NavBar />
+      <Navbar />
       <Suspense
         fallback={
           <Flex justifyContent={"center"} alignItems="center" height={"100vh"}>

@@ -20,15 +20,6 @@ const Section3 = () => {
         </Text>
         Solution
       </Text>
-      <Text
-        w={{ md: "90%", lg: "80%" }}
-        color={"#696984"}
-        textAlign={"center"}
-        fontSize={{ base: "16px", md: "20px", xl: "24px" }}
-      >
-        Skilline is one powerful online software suite that combines all the
-        tools needed to run a successful school or office.
-      </Text>
 
       <Container
         maxW={{ base: "container.xl", md: "85vw", xl: "80vw" }}

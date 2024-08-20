@@ -1,12 +1,10 @@
 import { Box, Flex, Image } from "@chakra-ui/react";
-import AppBar from "@shikshak/components/Header/AppBar";
-import Header from "@shikshak/components/Header/Header";
-import Sidebar from "@shikshak/components/SideBar";
 import useWindowSize from "@shikshak/hooks/useWindowResize";
 import { Suspense, useEffect, useMemo, useState } from "react";
 import { Outlet } from "react-router-dom";
 
 import { imageAssets } from "@shikshak/assets/images";
+import Navbar from "@shikshak/pages/NoAuth/Home/Navbar";
 import ErrorBoundary from "../ErrorBoundry";
 
 const sidebarAnimate = "all .25s ease";
@@ -52,28 +50,19 @@ const LayoutWrapper: React.FC = () => {
   return (
     <ErrorBoundary>
       <Flex>
-        <Sidebar
-          width={isHovered ? largeSidebarWidth : sidebarWidth}
-          isCollapsed={!open}
-          animate={sidebarAnimate}
-          onEnterSidebar={onEnterSidebar}
-          onExitSidebar={onExitSidebar}
-          isHovered={isHovered}
-        />
         <Box
           flexGrow={1}
-          ml={sidebarWidth + "px"}
           transition={sidebarAnimate}
           zIndex={0}
           overflowX="hidden"
         >
-          <AppBar flex={1} position="sticky" mb={0}>
+          {/* <AppBar flex={1} position="sticky" mb={0}>
             <Header
               width={open ? largeSidebarWidth : sidebarWidth}
               handleDrawerToggle={handleDrawerToggle}
               isDrawerOpen={open}
             />
-          </AppBar>
+          </AppBar> */}
           <Suspense
             fallback={
               <Flex
@@ -85,7 +74,8 @@ const LayoutWrapper: React.FC = () => {
               </Flex>
             }
           >
-            <Box px={6} pt={8} bg="gray.50">
+            <Box px={6} bg="gray.50">
+              <Navbar />
               <Outlet />
             </Box>
           </Suspense>

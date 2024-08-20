@@ -5,31 +5,32 @@ import {
   Flex,
   GridItem,
   HStack,
-  Icon,
   Image,
   SimpleGrid,
   Stack,
   Text
 } from "@chakra-ui/react";
 import { CalendarIcon } from "@shikshak/assets/icons/Calendar";
-import { CombinedComputerIcon } from "@shikshak/assets/icons/Computer";
 import { StatsIcon } from "@shikshak/assets/icons/Stats";
 import Rectangle from "@shikshak/assets/images/Rectangle4.png";
-import { colorScheme } from "@shikshak/theme/colorScheme";
-import { FaPlay } from "react-icons/fa";
+import { NAVIGATION_ROUTES } from "@shikshak/pages/App/navigationRoutes";
+import TokenService from "@shikshak/services/service-token";
+import { useNavigate } from "react-router-dom";
 import Banner from "../../../assets/images/homeImage.png";
-import NavBar from "./Navbar";
-import Section2 from "./Section2";
 import Section3 from "./Section3";
 import Section4 from "./Section4";
 import Section5 from "./Section5";
 
 const Home = () => {
+  const navigate = useNavigate();
+
+  const isAuthenticated = TokenService.isAuthenticated();
+
   return (
-    <Flex flexDir={"column"}>
+    <Flex flexDir={"column"} gap={6}>
       <Box p={4} bgImage={Rectangle}>
         <Container maxW={{ base: "98vw", lg: "90vw" }} p={0}>
-          <NavBar />
+          {/* <NavBar /> */}
 
           <SimpleGrid
             justifyItems={"center"}
@@ -63,29 +64,27 @@ const Home = () => {
                   color={"#464646"}
                   lineHeight={"160%"}
                 >
-                  At LearnEase, we believe in the power of education that
+                  At Shikshak, we believe in the power of education that
                   transcends boundaries. Our online platform is designed to
                   bring the classroom experience to your fingertips, making
                   learning a truly immersive and convenient journey.
                 </Text>
-                <HStack align={"center"}>
-                  <Button
-                    bg={"linear-gradient(180deg, #21C8F6 0%, #637BFF 100%)"}
-                    _hover={{
-                      bg: "linear-gradient(180deg, #21C8F6 0%, #637BFF 70%)"
-                    }}
-                    borderRadius={"80px"}
-                  >
-                    Join for Free
-                  </Button>
-                  <Button
-                    borderRadius={"full"}
-                    bg={"white"}
-                    _hover={{ bg: "gray.50" }}
-                  >
-                    <Icon as={FaPlay} textColor={"#21C8F6"} boxSize={4} />
-                  </Button>
-                </HStack>
+                {!isAuthenticated && (
+                  <HStack align={"center"}>
+                    <Button
+                      bg={"linear-gradient(180deg, #21C8F6 0%, #637BFF 100%)"}
+                      _hover={{
+                        bg: "linear-gradient(180deg, #21C8F6 0%, #637BFF 70%)"
+                      }}
+                      borderRadius={"80px"}
+                      onClick={() => {
+                        navigate(NAVIGATION_ROUTES.LOGIN);
+                      }}
+                    >
+                      Join for Free
+                    </Button>
+                  </HStack>
+                )}
               </Flex>
             </GridItem>
             <GridItem colSpan={1} pos={"relative"}>
@@ -108,40 +107,14 @@ const Home = () => {
                   <Text fontSize={"sm"}>Assisted Students</Text>
                 </Stack>
               </Flex>
-              <Flex
-                gap={4}
-                bg={"rgba(255, 255, 255, 0.80)"}
-                backdrop-filter={"blur(10px)"}
-                p={4}
-                borderRadius={"32px"}
-                pos={"absolute"}
-                bottom={20}
-                left={10}
-              >
-                <CombinedComputerIcon boxSize={12} />
-                <Stack gap={0}>
-                  <Text fontSize={"md"} fontWeight={700}>
-                    UX Class
-                  </Text>
-                  <Text fontSize={"sm"}>Today at: 12:00 pm</Text>
-                  <Button
-                    mt={2}
-                    size={"sm"}
-                    bg={colorScheme.orange_400}
-                    _hover={{ bg: colorScheme.orange_500 }}
-                    borderRadius={"80px"}
-                  >
-                    Join Now
-                  </Button>
-                </Stack>
-              </Flex>
+
               <Image h={"full"} w={"full"} src={Banner} alt="Home Banner" />
             </GridItem>
           </SimpleGrid>
         </Container>
       </Box>
       <Container maxW={{ base: "98vw", lg: "90vw" }} p={0}>
-        <Section2 />
+        {/* <Section2 /> */}
         <Section3 />
         <Section4 />
         <Section5 />

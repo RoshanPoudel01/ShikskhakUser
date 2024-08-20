@@ -1,4 +1,5 @@
 import { Flex, Spinner } from "@chakra-ui/react";
+import LayoutWrapper from "@shikshak/components/LayoutWrapper";
 import {
   Authorities,
   getRole,
@@ -8,7 +9,7 @@ import {
 } from "@shikshak/services/service-auth";
 import { useFetchInitData } from "@shikshak/services/service-init";
 import { Suspense, lazy, useEffect } from "react";
-import { Navigate, Outlet, Route, Routes } from "react-router-dom";
+import { Navigate, Route, Routes } from "react-router-dom";
 import Home from "../NoAuth/Home";
 import Register from "../NoAuth/Register";
 import { appRoutes } from "./appRoutes";
@@ -120,7 +121,7 @@ export default function App() {
               })}
             </>
           ) : (
-            <Route path="/" element={<Outlet />}>
+            <Route path="/" element={<LayoutWrapper />}>
               <Route index element={<Home />} />
               <Route path={NAVIGATION_ROUTES.REGISTER} element={<Register />} />
               <Route path={NAVIGATION_ROUTES.LOGIN} element={<Login />} />

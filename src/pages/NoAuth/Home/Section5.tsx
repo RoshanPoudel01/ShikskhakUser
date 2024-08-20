@@ -21,14 +21,14 @@ const Section5 = () => {
             >
               Everything you can do in a physical classroom,{" "}
               <Text as={"span"} color={"#F48C06"}>
-                you can do with LearnEase
+                you can do with Shikshak
               </Text>
             </Text>
             <Text
               color={"#696984"}
               fontSize={{ base: "16px", md: "20px", xl: "24px" }}
             >
-              With LearnEase, the virtual classroom experience is elevated to
+              With Shikshak, the virtual classroom experience is elevated to
               match every aspect of a physical classroom. From engaging
               interactions with expert instructors and collaborative discussions
               with peers to hands-on projects and personalized learning paths.
