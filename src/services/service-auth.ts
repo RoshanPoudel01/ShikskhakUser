@@ -16,6 +16,7 @@ export enum Authorities {
 export interface LoginDetails {
   email: string;
   password: string;
+  isUser: boolean;
 }
 
 // type TemplateProjectUserTokenDetails = ShikshakTokenDetails & {
@@ -37,7 +38,6 @@ const initLogout = () => {
 
 const useLogoutMutation = (noToast?: boolean) => {
   const queryClient = useQueryClient();
-  const navigate = useNavigate();
   return useMutation({
     mutationFn: initLogout,
     onSuccess: () => {
@@ -45,7 +45,6 @@ const useLogoutMutation = (noToast?: boolean) => {
 
       queryClient.clear();
       queryClient.setQueryData([authTokenKey], () => false);
-      navigate("/", { replace: true });
       !noToast && toastSuccess("Logged out Succesfully");
     }
   });
@@ -155,6 +154,7 @@ export const logoutAllTabs = () => {
 };
 export const getRole = () => {
   const tokenDetails = TokenService.getTokenDetails();
+  console.log({ tokenDetails });
   return {
     isTutor: tokenDetails?.role.includes(Authorities.tutor),
     isAdmin: tokenDetails?.role.includes(Authorities.admin)

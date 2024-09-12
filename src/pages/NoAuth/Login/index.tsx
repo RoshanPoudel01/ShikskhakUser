@@ -24,30 +24,35 @@ import { useLoginMutation } from "@shikshak/services/service-auth";
 import { useForm } from "react-hook-form";
 import { Link, useNavigate } from "react-router-dom";
 import z from "zod";
+
+const defaultValues = {
+  email: "",
+  password: ""
+};
 function LoginPage() {
   const { mutateAsync, isPending } = useLoginMutation();
-  const urlParams = new URLSearchParams(window.location.search);
   const navigate = useNavigate();
-
   const LoginSchema = z.object({
     email: z.string().email("Please enter a valid email address"),
     password: z.string().min(6, "Password must be at least 6 characters")
   });
   const { control, handleSubmit } = useForm({
-    defaultValues: {
-      email: "",
-      password: ""
-    },
+    defaultValues: defaultValues,
     resolver: zodResolver(LoginSchema)
   });
 
-  const onSubmit = async (data: any) => {
-    await mutateAsync(data);
-    const redirect = urlParams.get("redirect");
-    redirect
-      ? navigate(redirect, { replace: true })
-      : navigate("/", { replace: true });
-    // window.location.reload();
+  const onSubmit = async (data: typeof defaultValues) => {
+    try {
+      const response = await mutateAsync({
+        ...data,
+        isUser: true
+      });
+      if (response.status === 1) {
+        navigate("/", { replace: true });
+      }
+    } catch (e) {
+      console.error(e);
+    }
   };
 
   return (

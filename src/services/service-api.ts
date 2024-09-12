@@ -3,7 +3,13 @@ export const api = {
   refreshToken: "/token/refresh",
   init: "/initAdmin",
   test: "/test",
-  registerUser: "/registerUser"
+  registerUser: "/registerUser",
+
+  //classes
+  classes: {
+    getAllClasses: "/getClasses",
+    myClasses: "/getMyClasses"
+  }
 };
 
 export interface ShikshakResponse<T = any> {

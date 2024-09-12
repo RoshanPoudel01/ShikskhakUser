@@ -98,7 +98,10 @@ function Register() {
   });
   const onSubmit = async (data: typeof defaultValue) => {
     try {
-      await mutateAsync(data);
+      await mutateAsync({
+        ...data,
+        isUser: true
+      });
     } catch (e) {
       console.error(e);
     }

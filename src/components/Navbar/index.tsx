@@ -10,10 +10,8 @@ import {
   Link,
   Menu,
   MenuButton,
-  MenuIcon,
   MenuItem,
-  MenuList,
-  useDisclosure
+  MenuList
 } from "@chakra-ui/react";
 import TokenService from "@shikshak/services/service-token";
 import { FiLogOut } from "react-icons/fi";
@@ -24,24 +22,20 @@ function NavBar() {
   const isAuthenticated = TokenService.isAuthenticated();
   const path = useLocation().pathname.split("/")[1];
 
-  const {
-    isOpen: isMobileNavOpen,
-    onOpen: onMobileNavOpen,
-    onClose: onMobileNavClose
-  } = useDisclosure();
+  // const {
+  //   isOpen: isMobileNavOpen,
+  //   onOpen: onMobileNavOpen,
+  //   onClose: onMobileNavClose
+  // } = useDisclosure();
 
   const navigate = useNavigate();
   // const { mutateAsync } = useLogoutUser();
-  const { isOpen, onOpen, onClose } = useDisclosure();
   const handleSignOut = () => {
     // await mutateAsync();
     TokenService.clearToken();
     navigate("/");
   };
 
-  const handleCartOpen = () => {
-    TokenService.isAuthenticated() ? onOpen() : navigate("/login");
-  };
   return (
     <Flex
       bg={path ? "white" : "#BEBDBD"}
@@ -61,13 +55,13 @@ function NavBar() {
             onClose={onMobileNavClose}
             menus={menus}
           /> */}
-          <Icon
+          {/* <Icon
             onClick={onMobileNavOpen}
             display={{ base: "block", md: "none" }}
             cursor={"pointer"}
             boxSize={6}
             as={MenuIcon}
-          />
+          /> */}
 
           <HStack gap={"30px"}>
             <SearchIcon

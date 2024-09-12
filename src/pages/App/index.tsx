@@ -1,8 +1,6 @@
 import { Flex, Spinner } from "@chakra-ui/react";
 import LayoutWrapper from "@shikshak/components/LayoutWrapper";
 import {
-  Authorities,
-  getRole,
   logoutAllTabs,
   useAuthentication,
   useLogoutMutation
@@ -36,7 +34,6 @@ export default function App() {
     }
   }, [isAuthenticated]);
 
-  const { isAdmin } = getRole();
   useEffect(() => {
     let iID = null as null | NodeJS.Timeout;
     if (isAuthenticated) {
@@ -87,35 +84,16 @@ export default function App() {
                 return (
                   <Route key={index} path={route.path} element={route.element}>
                     {route.children &&
-                      (isAdmin
-                        ? route.children
-                            .filter(childRoute =>
-                              childRoute?.accessor?.includes(Authorities.admin)
-                            )
-                            .map((childRoute, childIndex) => (
-                              <Route
-                                key={childIndex}
-                                path={childRoute.path}
-                                element={childRoute.element}
-                                {...(childRoute.index && {
-                                  index: childRoute.index
-                                })}
-                              />
-                            ))
-                        : route.children
-                            .filter(childRoute =>
-                              childRoute?.accessor?.includes(Authorities.tutor)
-                            )
-                            .map((childRoute, childIndex) => (
-                              <Route
-                                key={childIndex}
-                                path={childRoute.path}
-                                element={childRoute.element}
-                                {...(childRoute.index && {
-                                  index: childRoute.index
-                                })}
-                              />
-                            )))}
+                      route.children.map((childRoute, childIndex) => (
+                        <Route
+                          key={childIndex}
+                          path={childRoute.path}
+                          element={childRoute.element}
+                          {...(childRoute.index && {
+                            index: childRoute.index
+                          })}
+                        />
+                      ))}
                   </Route>
                 );
               })}

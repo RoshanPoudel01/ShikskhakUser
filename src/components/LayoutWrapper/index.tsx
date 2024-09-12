@@ -1,6 +1,5 @@
 import { Box, Flex, Image } from "@chakra-ui/react";
-import useWindowSize from "@shikshak/hooks/useWindowResize";
-import { Suspense, useEffect, useMemo, useState } from "react";
+import { Suspense } from "react";
 import { Outlet } from "react-router-dom";
 
 import { imageAssets } from "@shikshak/assets/images";
@@ -8,44 +7,44 @@ import Navbar from "@shikshak/pages/NoAuth/Home/Navbar";
 import ErrorBoundary from "../ErrorBoundry";
 
 const sidebarAnimate = "all .25s ease";
-const largeSidebarWidth = 290;
-const smallSidebarWidth = 64;
+// const largeSidebarWidth = 290;
+// const smallSidebarWidth = 64;
 
 const LayoutWrapper: React.FC = () => {
-  const { width } = useWindowSize();
+  // const { width } = useWindowSize();
 
-  const [open, setOpen] = useState(true);
-  const [isHovered, setIsHovered] = useState(false);
+  // const [open, setOpen] = useState(true);
+  // const [isHovered, setIsHovered] = useState(false);
 
-  const sidebarWidth = useMemo(
-    () => (open ? largeSidebarWidth : smallSidebarWidth),
-    [open]
-  );
+  // const sidebarWidth = useMemo(
+  //   () => (open ? largeSidebarWidth : smallSidebarWidth),
+  //   [open]
+  // );
 
-  const handleDrawerToggle = () => {
-    setOpen(oldState => !oldState);
-    setIsHovered(false);
-  };
+  // const handleDrawerToggle = () => {
+  //   setOpen(oldState => !oldState);
+  //   setIsHovered(false);
+  // };
 
-  const onEnterSidebar = () => {
-    if (!open) {
-      setIsHovered(true);
-    }
-  };
-  const onExitSidebar = () => {
-    if (isHovered) {
-      setIsHovered(false);
-    }
-  };
+  // const onEnterSidebar = () => {
+  //   if (!open) {
+  //     setIsHovered(true);
+  //   }
+  // };
+  // const onExitSidebar = () => {
+  //   if (isHovered) {
+  //     setIsHovered(false);
+  //   }
+  // };
 
-  useEffect(() => {
-    if (width < 850) {
-      setOpen(false);
-    } else {
-      setOpen(true);
-    }
-    setIsHovered(false);
-  }, [width]);
+  // useEffect(() => {
+  //   if (width < 850) {
+  //     setOpen(false);
+  //   } else {
+  //     setOpen(true);
+  //   }
+  //   setIsHovered(false);
+  // }, [width]);
 
   return (
     <ErrorBoundary>

@@ -10,6 +10,7 @@ interface IRegisterRequest {
   last_name: string;
   email: string;
   password: string;
+  isUser: boolean;
 }
 const registerUser = (data: IRegisterRequest) => {
   return ShikshakClient.post(api.registerUser, data);

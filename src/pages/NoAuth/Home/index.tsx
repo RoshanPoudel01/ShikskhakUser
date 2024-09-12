@@ -30,8 +30,6 @@ const Home = () => {
     <Flex flexDir={"column"} gap={6}>
       <Box p={4} bgImage={Rectangle}>
         <Container maxW={{ base: "98vw", lg: "90vw" }} p={0}>
-          {/* <NavBar /> */}
-
           <SimpleGrid
             justifyItems={"center"}
             columns={{ base: 1, md: 2 }}

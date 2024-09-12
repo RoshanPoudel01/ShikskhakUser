@@ -36,7 +36,7 @@ export const ShikshakData = [
   {
     id: 2,
     heading: "For Students",
-    button: "Enter an access code",
+    button: "Browse through classes",
     image: Image2
   }
 ];

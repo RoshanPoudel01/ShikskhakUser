@@ -1,5 +1,5 @@
 import { IInitData } from "@shikshak/services/service-init";
-import create from "zustand";
+import { create } from "zustand";
 
 interface IInitDataStore {
   initData?: IInitData;

@@ -1,9 +1,8 @@
 import LayoutWrapper from "@shikshak/components/LayoutWrapper";
 import PageNotFound from "@shikshak/components/LayoutWrapper/NotFound";
-import { lazy } from "react";
-import LoginPage from "../NoAuth/Login";
+import AllClasses from "../Authorized/Classes/AllClasses";
+import Home from "../NoAuth/Home";
 import { NAVIGATION_ROUTES } from "./navigationRoutes";
-const Dashboard = lazy(() => import("@shikshak/pages/Authorized/Dashboard"));
 interface IAppRoutes {
   index?: boolean;
   path?: string;
@@ -19,11 +18,11 @@ export const appRoutes: IAppRoutes[] = [
     children: [
       {
         index: true,
-        element: <Dashboard />
+        element: <Home />
       },
       {
-        path: NAVIGATION_ROUTES.LOGIN,
-        element: <LoginPage />
+        path: NAVIGATION_ROUTES.ALL_CLASSES,
+        element: <AllClasses />
       },
 
       {
