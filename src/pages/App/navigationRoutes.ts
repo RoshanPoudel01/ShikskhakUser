@@ -3,6 +3,10 @@ export const NAVIGATION_ROUTES = {
   REGISTER: "/register",
   HOME: "/",
 
+  //courses
+  ALL_COURSES: "/all-courses",
+
+  //classes
   ALL_CLASSES: "/all-classes",
   MY_CLASSES: "/my-classes",
   //User

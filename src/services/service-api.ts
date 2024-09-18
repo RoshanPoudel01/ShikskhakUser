@@ -8,7 +8,11 @@ export const api = {
   //classes
   classes: {
     getAllClasses: "/getClasses",
-    myClasses: "/getMyClasses"
+    myClasses: "/getMyClasses",
+    joinClass: "/joinClass/id={id}"
+  },
+  course: {
+    getAllCourses: "/getCourses"
   }
 };
 

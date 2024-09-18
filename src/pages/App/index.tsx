@@ -8,6 +8,7 @@ import {
 import { useFetchInitData } from "@shikshak/services/service-init";
 import { Suspense, lazy, useEffect } from "react";
 import { Navigate, Route, Routes } from "react-router-dom";
+import AllCourses from "../NoAuth/Courses/AllClourses";
 import Home from "../NoAuth/Home";
 import Register from "../NoAuth/Register";
 import { appRoutes } from "./appRoutes";
@@ -103,6 +104,10 @@ export default function App() {
               <Route index element={<Home />} />
               <Route path={NAVIGATION_ROUTES.REGISTER} element={<Register />} />
               <Route path={NAVIGATION_ROUTES.LOGIN} element={<Login />} />
+              <Route
+                path={NAVIGATION_ROUTES.ALL_COURSES}
+                element={<AllCourses />}
+              />
               <Route path="*" element={<MissingRoute />} />
             </Route>
           )}

@@ -1,23 +1,22 @@
 import { css, Global } from "@emotion/react";
 
-import Poppins from "@shikshak/assets/fonts/Poppins/Poppins-Regular.ttf";
-
+import Mulish from "@shikshak/assets/fonts/Mulish/Mulish-VariableFont_wght.ttf";
 const globalStyles = () => {
   return (
     <Global
       styles={() => css`
         @font-face {
-          font-family: "Poppins";
+          font-family: "Mulish";
           font-style: normal;
           font-weight: regular;
-          src: url(${Poppins}) format("truetype");
+          src: url(${Mulish}) format("truetype");
         }
         html,
         body {
           margin: 0;
           padding: 0;
           min-height: 100%;
-          font-family: "Poppins";
+          font-family: "Mulish";
           scroll-behavior: smooth;
           background: #f6f9ff;
         }
@@ -28,7 +27,7 @@ const globalStyles = () => {
           font-size: 14px;
           padding-top: 0px;
           margin: 0px;
-          font-family: "Poppins";
+          font-family: "Mulish";
         }
         * {
           box-sizing: border-box;

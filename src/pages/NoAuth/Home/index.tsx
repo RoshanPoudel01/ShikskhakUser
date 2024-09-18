@@ -36,7 +36,7 @@ const Home = () => {
             spacing={10}
           >
             <GridItem alignContent={"center"} colSpan={1}>
-              <Flex fontStyle={"Poppins"} flexDir={"column"} gap={2}>
+              <Flex fontStyle={"Mulish"} flexDir={"column"} gap={2}>
                 <Text
                   fontWeight={700}
                   fontSize={{

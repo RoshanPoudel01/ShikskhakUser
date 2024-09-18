@@ -10,8 +10,8 @@ export { globalStyles } from "./global";
 export const theme = extendTheme(
   {
     fonts: {
-      heading: "Poppins",
-      body: "Poppins"
+      heading: "Mulish",
+      body: "Mulish"
     },
     shadows: { outline: "0 0 0 3px var(--chakra-colors-purple-100)" },
     components: {
@@ -20,7 +20,8 @@ export const theme = extendTheme(
       Table: TableConfig
     },
     breakpoints: {
-      sm: "320px",
+      base: "320px",
+      sm: "412px",
       md: "768px",
       lg: "960px",
       xl: "1200px",
