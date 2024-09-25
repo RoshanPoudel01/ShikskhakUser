@@ -20,9 +20,12 @@ export interface Class {
   id: number;
   title: string;
   startTime: string;
-  endTime?: string;
+  endTime: string;
   description: string;
-  user?: string;
+  startDate: string;
+  endDate: string;
+  price: number;
+  isActive: boolean;
 }
 
 export interface User {

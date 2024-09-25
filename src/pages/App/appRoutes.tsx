@@ -1,6 +1,7 @@
 import LayoutWrapper from "@shikshak/components/LayoutWrapper";
 import PageNotFound from "@shikshak/components/LayoutWrapper/NotFound";
 import AllClasses from "../Authorized/Classes";
+import EnrolledClasses from "../Authorized/Classes/EnrolledClasses";
 import AllCourses from "../NoAuth/Courses/AllClourses";
 import Home from "../NoAuth/Home";
 import { NAVIGATION_ROUTES } from "./navigationRoutes";
@@ -28,6 +29,10 @@ export const appRoutes: IAppRoutes[] = [
       {
         path: NAVIGATION_ROUTES.ALL_COURSES,
         element: <AllCourses />
+      },
+      {
+        path: NAVIGATION_ROUTES.MY_CLASSES,
+        element: <EnrolledClasses />
       },
       {
         path: "*",

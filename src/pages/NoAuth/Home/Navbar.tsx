@@ -19,7 +19,7 @@ const Navbar = () => {
     },
     {
       name: "My Classes",
-      // link: NAVIGATION_ROUTES.CLASSES,
+      link: NAVIGATION_ROUTES.MY_CLASSES,
       isAuth: true
     },
     {

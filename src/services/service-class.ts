@@ -54,4 +54,17 @@ const useJoinClass = (id: number | null) => {
     queryFn: joinClass(id)
   });
 };
-export { useGetAllClasses, useJoinClass };
+
+const myClasses = () => {
+  return ShikshakClient.get<ShikshakResponse<ClassResponse[]>>(
+    api.classes.myClasses
+  );
+};
+const useGetMyClasses = () => {
+  return useQuery({
+    queryKey: [api.classes.myClasses],
+    queryFn: myClasses,
+    select: response => response.data.data
+  });
+};
+export { useGetAllClasses, useGetMyClasses, useJoinClass };
