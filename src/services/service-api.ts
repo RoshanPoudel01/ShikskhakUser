@@ -12,8 +12,11 @@ export const api = {
     joinClass: "/joinClass/id={id}"
   },
   course: {
-    getAllCourses: "/getCourses"
-  }
+    getAllCourses: "/getCourses",
+    clickCourse: "/updateCourseClicks/id={id}",
+    topCourses: "/topCourses"
+  },
+  recommendations: "/recommendations"
 };
 
 export interface ShikshakResponse<T = any> {

@@ -73,6 +73,7 @@ const Section4 = () => {
                     _hover={{ bg: "white", textColor: "#2F327D" }}
                     variant={"outline"}
                     borderRadius={"80px"}
+                    onClick={() => window.open(item.link, "_blank")}
                   >
                     {item.button}
                   </Button>

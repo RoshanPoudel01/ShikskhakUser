@@ -50,4 +50,44 @@ const useGetAllCourses = () => {
     select: response => response.data.data
   });
 };
-export { useGetAllCourses };
+
+const updateCourseClicks = (id: number | null) => () => {
+  return ShikshakClient.get(api.course.clickCourse.replace("{id}", id + ""));
+};
+const useUpdateCourseClicks = (id: number | null) => {
+  return useQuery({
+    enabled: false,
+    queryKey: [api.course.clickCourse],
+    queryFn: updateCourseClicks(id)
+  });
+};
+
+const getTopCourses = () => {
+  return ShikshakClient.get<ShikshakResponse<ICourseResponse[]>>(
+    api.course.topCourses
+  );
+};
+const useGetTopCourses = () => {
+  return useQuery({
+    queryKey: [api.course.topCourses],
+    queryFn: getTopCourses,
+    select: response => response.data.data
+  });
+};
+
+const getRecommendedCourses = () => {
+  return ShikshakClient.get<ShikshakResponse<any>>(api.recommendations);
+};
+const useGetRecommendedCourses = () => {
+  return useQuery({
+    queryKey: [api.recommendations],
+    queryFn: getRecommendedCourses,
+    select: response => response.data.data
+  });
+};
+export {
+  useGetAllCourses,
+  useGetRecommendedCourses,
+  useGetTopCourses,
+  useUpdateCourseClicks
+};

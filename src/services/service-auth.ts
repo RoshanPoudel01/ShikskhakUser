@@ -37,12 +37,13 @@ const initLogout = () => {
 };
 
 const useLogoutMutation = (noToast?: boolean) => {
+  const navigate = useNavigate();
   const queryClient = useQueryClient();
   return useMutation({
     mutationFn: initLogout,
     onSuccess: () => {
       logoutChannel.postMessage("Logout");
-
+      navigate("/login", { replace: true });
       queryClient.clear();
       queryClient.setQueryData([authTokenKey], () => false);
       !noToast && toastSuccess("Logged out Succesfully");
@@ -154,7 +155,6 @@ export const logoutAllTabs = () => {
 };
 export const getRole = () => {
   const tokenDetails = TokenService.getTokenDetails();
-  console.log({ tokenDetails });
   return {
     isTutor: tokenDetails?.role.includes(Authorities.tutor),
     isAdmin: tokenDetails?.role.includes(Authorities.admin)

@@ -2,6 +2,7 @@ import { CalendarIcon } from "@shikshak/assets/icons/Calendar";
 import { NotesIcon } from "@shikshak/assets/icons/Notes";
 import Image1 from "@shikshak/assets/images/learnease1.png";
 import Image2 from "@shikshak/assets/images/learnease2.png";
+import { NAVIGATION_ROUTES } from "@shikshak/pages/App/navigationRoutes";
 
 export const allInOneData = [
   {
@@ -31,12 +32,14 @@ export const ShikshakData = [
     id: 1,
     heading: "For Instructors",
     button: "Start a class today",
-    image: Image1
+    image: Image1,
+    link: "http://localhost:7000/"
   },
   {
     id: 2,
     heading: "For Students",
-    button: "Browse through classes",
-    image: Image2
+    button: "Browse through courses",
+    image: Image2,
+    link: NAVIGATION_ROUTES.ALL_COURSES
   }
 ];

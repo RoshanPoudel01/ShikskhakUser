@@ -7,10 +7,8 @@ import {
   HStack,
   Image,
   SimpleGrid,
-  Stack,
   Text
 } from "@chakra-ui/react";
-import { CalendarIcon } from "@shikshak/assets/icons/Calendar";
 import { StatsIcon } from "@shikshak/assets/icons/Stats";
 import Rectangle from "@shikshak/assets/images/Rectangle4.png";
 import { NAVIGATION_ROUTES } from "@shikshak/pages/App/navigationRoutes";
@@ -87,7 +85,7 @@ const Home = () => {
             </GridItem>
             <GridItem colSpan={1} pos={"relative"}>
               <StatsIcon pos={"absolute"} top={10} right={10} />
-              <Flex
+              {/* <Flex
                 gap={4}
                 bg={"rgba(255, 255, 255, 0.80)"}
                 backdrop-filter={"blur(10px)"}
@@ -104,7 +102,7 @@ const Home = () => {
                   </Text>
                   <Text fontSize={"sm"}>Assisted Students</Text>
                 </Stack>
-              </Flex>
+              </Flex> */}
 
               <Image h={"full"} w={"full"} src={Banner} alt="Home Banner" />
             </GridItem>

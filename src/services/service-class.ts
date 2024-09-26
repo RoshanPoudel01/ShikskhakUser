@@ -10,6 +10,9 @@ export interface ClassResponse {
   endTime: string;
   course: Course;
   tutor: Tutor;
+  startDate: string;
+  endDate: string;
+  classLink: string;
 }
 
 export interface Tutor {

@@ -12,11 +12,11 @@ const Navbar = () => {
 
   //Navbar itens
   const navItems = [
-    {
-      name: "About Us",
-      // link: NAVIGATION_ROUTES.ABOUT_US,
-      isAuth: false
-    },
+    // {
+    //   name: "About Us",
+    //   // link: NAVIGATION_ROUTES.ABOUT_US,
+    //   isAuth: false
+    // },
     {
       name: "My Classes",
       link: NAVIGATION_ROUTES.MY_CLASSES,

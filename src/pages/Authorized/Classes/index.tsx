@@ -47,6 +47,9 @@ const AllClasses = () => {
       if (isError) {
         toastFail(error?.response?.data?.message);
       }
+      // if (data.data.status === 1) {
+      //   window.location.href = data.data.data.payment_url;
+      // }
       if (data) {
         toastSuccess(data?.data?.message ?? "You Joined Class Successfully");
       }
@@ -133,23 +136,46 @@ const AllClasses = () => {
                           <Grid templateColumns="repeat(2, 1fr)" gap={4}>
                             <GridItem>
                               <Text fontSize="lg" fontWeight="semibold">
-                                Start Time:
+                                Start Date:
                               </Text>
                               <Text>
-                                {moment(classItem.startTime).format(
-                                  "YYYY-MM-DD HH:mm:ss a"
+                                {moment(classItem.startDate).format(
+                                  "YYYY-MM-DD "
                                 )}
                               </Text>
                             </GridItem>
                             <GridItem>
                               <Text fontSize="lg" fontWeight="semibold">
-                                End Time:
+                                End Date:
                               </Text>
                               <Text>
-                                {moment(classItem.endTime).format(
-                                  "YYYY-MM-DD HH:mm:ss a"
+                                {moment(classItem.endDate).format(
+                                  "YYYY-MM-DD "
                                 )}
                               </Text>
+                            </GridItem>
+                            <GridItem colSpan={1}>
+                              {" "}
+                              {/* Adjusted to span full width */}
+                              <Text fontSize="lg" fontWeight="semibold">
+                                Class Timing:
+                              </Text>
+                              <Text>
+                                {moment(
+                                  classItem.startTime,
+                                  "HH:mm:ss A"
+                                ).format("hh:mm A")}{" "}
+                                to{" "}
+                                {moment(classItem.endTime, "HH:mm:ss A").format(
+                                  "hh:mm A"
+                                )}
+                              </Text>
+                            </GridItem>
+                            <GridItem colSpan={1}>
+                              <Text fontSize="lg" fontWeight="semibold">
+                                Price:
+                              </Text>
+                              <Text>Rs. {classItem.price}</Text>
                             </GridItem>
                             <GridItem colSpan={2}>
                               {" "}
@@ -166,7 +192,6 @@ const AllClasses = () => {
                               justifyContent="flex-end"
                             >
                               <Button
-                                colorScheme="teal"
                                 variant="solid"
                                 size="md"
                                 onClick={() => {
@@ -174,7 +199,7 @@ const AllClasses = () => {
                                   onOpenConfirmationModal();
                                 }}
                               >
-                                Join Class
+                                Enroll Now
                               </Button>
                             </GridItem>
                           </Grid>
