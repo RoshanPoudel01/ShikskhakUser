@@ -1,4 +1,4 @@
-import { HStack, SimpleGrid, Stack, Text } from "@chakra-ui/react";
+import { Button, HStack, SimpleGrid, Stack, Text } from "@chakra-ui/react";
 import CourseCard from "@shikshak/components/Common/CourseCard";
 import { NAVIGATION_ROUTES } from "@shikshak/pages/App/navigationRoutes";
 import { useAuthentication } from "@shikshak/services/service-auth";
@@ -14,7 +14,7 @@ const AllCourses = () => {
   const { data: courseData } = useGetAllCourses();
   const { data: isAuthenticated } = useAuthentication();
   const { data: topCourses } = useGetTopCourses();
-
+  const [perPage, setPerPage] = useState(10);
   const navigate = useNavigate();
   const [courseId, setCourseId] = useState<number | null>(null);
   const { refetch } = useUpdateCourseClicks(courseId);
@@ -100,7 +100,7 @@ const AllCourses = () => {
         }}
         spacing={4}
       >
-        {courseData?.map(item => (
+        {courseData?.slice(0, perPage).map(item => (
           <CourseCard
             description={item.description}
             key={item.id}
@@ -129,6 +129,16 @@ const AllCourses = () => {
           />
         ))}
       </SimpleGrid>
+      <HStack mt={4} justify={"center"} align={"center"}>
+        <Button
+          display={
+            courseData && courseData?.length <= perPage ? "none" : "block"
+          }
+          onClick={() => setPerPage(perPage + 10)}
+        >
+          Load More
+        </Button>
+      </HStack>
     </Stack>
   );
 };
