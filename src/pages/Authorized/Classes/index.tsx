@@ -1,31 +1,27 @@
 import {
   Box,
-  Button,
   Center,
   Flex,
-  Grid,
-  GridItem,
   Heading,
   SimpleGrid,
   Text,
-  useDisclosure,
-  VStack
+  useDisclosure
 } from "@chakra-ui/react";
+import ClassCard from "@shikshak/components/Common/ClassCard";
 import ConfirmationModal from "@shikshak/components/Modal/DeleteModal";
 import { NAVIGATION_ROUTES } from "@shikshak/pages/App/navigationRoutes";
-import { useJoinClass } from "@shikshak/services/service-class";
 import { Class } from "@shikshak/services/service-course";
-import { toastFail, toastSuccess } from "@shikshak/utility/Toast";
-import moment from "moment";
+import { usePaymentInitiate } from "@shikshak/services/service-init";
+import { loadStripe } from "@stripe/stripe-js";
 import { useState } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
-
+export const STRIPE_KEY = import.meta.env.STRIPE_PUBLIC_KEY;
 const AllClasses = () => {
   const location = useLocation();
   const navigate = useNavigate();
   const [classId, setClassId] = useState<number | null>(null);
-  const { refetch, isLoading: isJoining } = useJoinClass(classId);
-
+  const [amount, setAmount] = useState<number | null>(null);
+  const { mutateAsync } = usePaymentInitiate();
   const {
     isOpen: isConfirmationModalOpen,
     onClose: onCloseConfirmationModal,
@@ -34,27 +30,16 @@ const AllClasses = () => {
 
   const handleJoinClass = async () => {
     try {
-      const {
-        data,
-        isError,
-        error
-      }: {
-        data: any;
-        isError: boolean;
-        error: any;
-      } = await refetch();
-
-      if (isError) {
-        toastFail(error?.response?.data?.message);
-      }
-      // if (data.data.status === 1) {
-      //   window.location.href = data.data.data.payment_url;
-      // }
-      if (data) {
-        toastSuccess(data?.data?.message ?? "You Joined Class Successfully");
-      }
-      setClassId(null);
-      onCloseConfirmationModal();
+      const stripe = await loadStripe(
+        "pk_test_51Q41aIECDhAPkwcwuxSuv6cYzE6jfZknhlBKUtEYHmK4Y32vxIgQZzWNfbVHTKGwcYygkRKgClrX4RKyK7iCAcv400IDWRi7kF"
+      );
+      const response = await mutateAsync({
+        amount: amount,
+        classId: classId
+      });
+      await stripe?.redirectToCheckout({
+        sessionId: response.data.id
+      });
     } catch (e) {
       console.error(e);
     }
@@ -102,109 +87,23 @@ const AllClasses = () => {
                     base: 1,
                     sm: 1,
                     md: 2,
-                    lg: 3
+                    lg: 4
                   }}
-                  gap={6}
+                  gap={5}
                   w="full"
                   maxW="1400px" // Constrain the grid width for better appearance
                 >
                   {location.state.classes?.map(
                     (classItem: Class, index: number) => (
-                      <Box
-                        key={index}
-                        bg="white"
-                        p={6}
-                        borderRadius="md"
-                        boxShadow="md"
-                        borderWidth="1px" // Add a border to define card boundaries
-                        borderColor="gray.200" // Lighter border color
-                        overflow="hidden"
-                        transition="transform 0.2s, box-shadow 0.2s" // Smooth transitions
-                        _hover={{
-                          transform: "scale(1.02)", // Slightly enlarge on hover
-                          boxShadow: "lg" // Enhance shadow on hover
-                        }}
-                      >
-                        <VStack spacing={4} align="stretch">
-                          <Text
-                            fontSize="2xl"
-                            fontWeight="bold"
-                            textAlign="center"
-                          >
-                            {classItem.title}
-                          </Text>
-                          <Grid templateColumns="repeat(2, 1fr)" gap={4}>
-                            <GridItem>
-                              <Text fontSize="lg" fontWeight="semibold">
-                                Start Date:
-                              </Text>
-                              <Text>
-                                {moment(classItem.startDate).format(
-                                  "YYYY-MM-DD "
-                                )}
-                              </Text>
-                            </GridItem>
-                            <GridItem>
-                              <Text fontSize="lg" fontWeight="semibold">
-                                End Date:
-                              </Text>
-                              <Text>
-                                {moment(classItem.endDate).format(
-                                  "YYYY-MM-DD "
-                                )}
-                              </Text>
-                            </GridItem>
-                            <GridItem colSpan={1}>
-                              {" "}
-                              {/* Adjusted to span full width */}
-                              <Text fontSize="lg" fontWeight="semibold">
-                                Class Timing:
-                              </Text>
-                              <Text>
-                                {moment(
-                                  classItem.startTime,
-                                  "HH:mm:ss A"
-                                ).format("hh:mm A")}{" "}
-                                to{" "}
-                                {moment(classItem.endTime, "HH:mm:ss A").format(
-                                  "hh:mm A"
-                                )}
-                              </Text>
-                            </GridItem>
-                            <GridItem colSpan={1}>
-                              <Text fontSize="lg" fontWeight="semibold">
-                                Price:
-                              </Text>
-                              <Text>Rs. {classItem.price}</Text>
-                            </GridItem>
-                            <GridItem colSpan={2}>
-                              {" "}
-                              {/* Adjusted to span full width */}
-                              <Text fontSize="lg" fontWeight="semibold">
-                                Description:
-                              </Text>
-                              <Text>{classItem.description}</Text>
-                            </GridItem>
-                            <GridItem
-                              colSpan={2}
-                              display="flex"
-                              alignItems="center"
-                              justifyContent="flex-end"
-                            >
-                              <Button
-                                variant="solid"
-                                size="md"
-                                onClick={() => {
-                                  setClassId(classItem.id);
-                                  onOpenConfirmationModal();
-                                }}
-                              >
-                                Enroll Now
-                              </Button>
-                            </GridItem>
-                          </Grid>
-                        </VStack>
-                      </Box>
+                      <>
+                        <ClassCard
+                          key={index}
+                          classItem={classItem}
+                          setClassId={setClassId}
+                          setAmount={setAmount}
+                          onOpenConfirmationModal={onOpenConfirmationModal}
+                        />
+                      </>
                     )
                   )}
                 </SimpleGrid>
@@ -227,7 +126,7 @@ const AllClasses = () => {
             title="Are you sure you want to join the class?"
             message="You are joining this class"
             buttonText="Okay"
-            isLoading={isJoining}
+            // isLoading={isJoining}
             isOpen={isConfirmationModalOpen}
             onClose={() => {
               setClassId(null);

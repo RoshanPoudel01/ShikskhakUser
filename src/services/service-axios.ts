@@ -5,6 +5,7 @@ import TokenService from "./service-token";
 const THREE_MINUTES = 3 * 60 * 1000;
 export const baseURL = import.meta.env.VITE_APP_BACKEND_API;
 export const baseImageURL = import.meta.env.VITE_APP_BACKEND_IMAGE_API;
+export const STRIPE_KEY = import.meta.env.STRIPE_PUBLIC_KEY;
 
 /**
  * Axios HTTP Client

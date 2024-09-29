@@ -4,7 +4,8 @@ export const api = {
   init: "/initAdmin",
   test: "/test",
   registerUser: "/registerUser",
-
+  userProfile: "/createUserProfile",
+  changePassword: "/changePassword",
   //classes
   classes: {
     getAllClasses: "/getClasses",
@@ -16,7 +17,8 @@ export const api = {
     clickCourse: "/updateCourseClicks/id={id}",
     topCourses: "/topCourses"
   },
-  recommendations: "/recommendations"
+  recommendations: "/recommendations",
+  payment: "/create-checkout-session"
 };
 
 export interface ShikshakResponse<T = any> {

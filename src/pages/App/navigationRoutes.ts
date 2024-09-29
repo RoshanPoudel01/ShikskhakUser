@@ -5,7 +5,7 @@ export const NAVIGATION_ROUTES = {
 
   //courses
   ALL_COURSES: "/all-courses",
-
+  PROFILE: "/profile",
   //classes
   ALL_CLASSES: "/all-classes",
   MY_CLASSES: "/my-classes",
@@ -13,5 +13,8 @@ export const NAVIGATION_ROUTES = {
 
   DASHBOARD: "/dashbaord",
   COLLAPSE: "/collapse",
-  EXAMPLE: "/example"
+  EXAMPLE: "/example",
+
+  SUCCESS_PAYMENT: "/success",
+  FAIL_PAYMENT: "/fail"
 };

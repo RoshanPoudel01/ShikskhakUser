@@ -3,6 +3,7 @@ import { BrandIcon } from "@shikshak/assets/icons/Brand";
 import { NAVIGATION_ROUTES } from "@shikshak/pages/App/navigationRoutes";
 import { useLogoutMutation } from "@shikshak/services/service-auth";
 import TokenService from "@shikshak/services/service-token";
+import { colorScheme } from "@shikshak/theme/colorScheme";
 import { useNavigate } from "react-router-dom";
 
 const Navbar = () => {
@@ -18,8 +19,23 @@ const Navbar = () => {
     //   isAuth: false
     // },
     {
+      name: "All Courses",
+      link: NAVIGATION_ROUTES.ALL_COURSES,
+      isAuth: true
+    },
+    {
+      name: "All Courses",
+      link: NAVIGATION_ROUTES.ALL_COURSES,
+      isAuth: false
+    },
+    {
       name: "My Classes",
       link: NAVIGATION_ROUTES.MY_CLASSES,
+      isAuth: true
+    },
+    {
+      name: "My Profile",
+      link: NAVIGATION_ROUTES.PROFILE,
       isAuth: true
     },
     {
@@ -52,8 +68,15 @@ const Navbar = () => {
         </Text>
       </HStack>
 
-      <HStack gap={12} align={"center"}>
+      <HStack gap={6} align={"center"}>
         <Text
+          fontWeight={"bold"}
+          p={2}
+          _hover={{
+            bg: colorScheme.primary_100,
+            color: "white",
+            borderRadius: "12px"
+          }}
           cursor={"pointer"}
           fontSize={"lg"}
           onClick={() => {
@@ -66,6 +89,13 @@ const Navbar = () => {
           if (item.isAuth && isAuthenticated) {
             return (
               <Text
+                p={2}
+                fontWeight={"bold"}
+                _hover={{
+                  bg: colorScheme.primary_100,
+                  color: "white",
+                  borderRadius: "12px"
+                }}
                 key={index}
                 cursor={"pointer"}
                 fontSize={"lg"}
@@ -85,6 +115,13 @@ const Navbar = () => {
           } else if (!item.isAuth && !isAuthenticated) {
             return (
               <Text
+                p={2}
+                _hover={{
+                  bg: colorScheme.primary_100,
+                  color: "white",
+                  borderRadius: "12px"
+                }}
+                fontWeight={"bold"}
                 key={index}
                 cursor={"pointer"}
                 fontSize={"lg"}

@@ -37,6 +37,105 @@ export interface Userprofile {
   profilePicture: string;
   phoneNumber: string;
 }
+
+export interface RootInterface {
+  recommendations: Recommendation[];
+  accuracy: number;
+}
+
+export interface Recommendation {
+  courseId: number;
+  title: string;
+  classes: (Class | Classes2)[];
+  imageUrl: string;
+  user: User;
+  similarity: number;
+}
+
+export interface User {
+  id: number;
+  first_name: string;
+  middle_name: string;
+  last_name: string;
+  email: string;
+  password: string;
+  isAdmin: boolean;
+  isUser: boolean;
+  isActive: boolean;
+  createdAt: string;
+  updatedAt: string;
+  userprofile: Userprofile;
+}
+
+export interface Userprofile {
+  id: number;
+  address: string;
+  phoneNumber: string;
+  profilePicture: string;
+  userId: number;
+  document: string;
+  dateOfBirth: string;
+  educationQualification: string;
+  createdAt: string;
+  updatedAt: string;
+}
+
+export interface Classes2 {
+  id: number;
+  title: string;
+  description: string;
+  courseId: number;
+  createdBy: number;
+  startDate: string;
+  endDate: string;
+  startTime: string;
+  endTime: string;
+  isActive: boolean;
+  joinedUser?: number;
+  classLink: string;
+  price: number;
+  createdAt: string;
+  updatedAt: string;
+}
+
+export interface Class {
+  id: number;
+  title: string;
+  description: string;
+  courseId: number;
+  createdBy: number;
+  startDate: string;
+  endDate: string;
+  startTime: string;
+  endTime: string;
+  isActive: boolean;
+  joinedUser: number;
+  classLink: string;
+  price: number;
+  createdAt: string;
+  updatedAt: string;
+  course: Course;
+  user: User;
+}
+
+export interface User {
+  id: number;
+  first_name: string;
+  middle_name: string;
+  last_name: string;
+  email: string;
+  password: string;
+  isAdmin: boolean;
+  isUser: boolean;
+  isActive: boolean;
+  createdAt: string;
+  updatedAt: string;
+}
+
+export interface Course {
+  id: number;
+  title: string;
+}
 const getAllCourses = () => {
   return ShikshakClient.get<ShikshakResponse<ICourseResponse[]>>(
     api.course.getAllCourses
@@ -76,13 +175,14 @@ const useGetTopCourses = () => {
 };
 
 const getRecommendedCourses = () => {
-  return ShikshakClient.get<ShikshakResponse<any>>(api.recommendations);
+  return ShikshakClient.get<ShikshakResponse<RootInterface>>(
+    api.recommendations
+  );
 };
 const useGetRecommendedCourses = () => {
   return useQuery({
     queryKey: [api.recommendations],
-    queryFn: getRecommendedCourses,
-    select: response => response.data.data
+    queryFn: getRecommendedCourses
   });
 };
 export {

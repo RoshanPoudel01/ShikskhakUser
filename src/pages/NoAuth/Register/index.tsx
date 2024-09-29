@@ -8,63 +8,21 @@ import {
   Flex,
   GridItem,
   Heading,
+  IconButton,
   Image,
   SimpleGrid,
-  Stack
+  Stack,
+  useDisclosure
 } from "@chakra-ui/react";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { imageAssets } from "@shikshak/assets/images";
 import TextInput from "@shikshak/components/Form/TextInput";
 import { useRegisterUser } from "@shikshak/services/service-register";
 import { useForm } from "react-hook-form";
+import { BsEye, BsEyeSlash } from "react-icons/bs";
 import { useNavigate } from "react-router-dom";
 import z from "zod";
 
-const RegisterInput = [
-  {
-    id: 1,
-    label: "First Name",
-    name: "first_name",
-    type: "text",
-    isRequired: true
-  },
-  {
-    id: 1,
-    label: "Middle Name",
-    name: "middle_name",
-    type: "text",
-    isRequired: false
-  },
-  {
-    id: 1,
-    label: "Last Name",
-    name: "last_name",
-    type: "text",
-    isRequired: true
-  },
-  {
-    id: 2,
-    label: "Email",
-    name: "email",
-    type: "email",
-    isRequired: true
-  },
-
-  {
-    id: 3,
-    label: "Password",
-    name: "password",
-    type: "password",
-    isRequired: true
-  },
-  {
-    id: 4,
-    label: "Confirm Password",
-    name: "confirm_password",
-    type: "password",
-    isRequired: true
-  }
-];
 const defaultValue = {
   first_name: "",
   middle_name: "",
@@ -74,19 +32,93 @@ const defaultValue = {
   confirm_password: ""
 };
 function Register() {
+  const { isOpen: visible, onToggle: onToggleVisibility } = useDisclosure();
+  const { isOpen: confirmVisible, onToggle: onToggleConfirmVisibility } =
+    useDisclosure();
+  const RegisterInput = [
+    {
+      id: 1,
+      label: "First Name",
+      name: "first_name",
+      type: "text",
+      isRequired: true
+    },
+    {
+      id: 1,
+      label: "Middle Name",
+      name: "middle_name",
+      type: "text",
+      isRequired: false
+    },
+    {
+      id: 1,
+      label: "Last Name",
+      name: "last_name",
+      type: "text",
+      isRequired: true
+    },
+    {
+      id: 2,
+      label: "Email",
+      name: "email",
+      type: "email",
+      isRequired: true
+    },
+
+    {
+      id: 3,
+      label: "Password",
+      name: "password",
+      isRequired: true,
+      type: visible ? "text" : "password",
+
+      endicons: (
+        <IconButton
+          tabIndex={-1}
+          colorScheme={"black"}
+          size="xs"
+          variant="link"
+          aria-label="password-control"
+          onClick={onToggleVisibility}
+          icon={visible ? <BsEyeSlash /> : <BsEye />}
+        />
+      )
+    },
+    {
+      id: 4,
+      label: "Confirm Password",
+      name: "confirm_password",
+      type: confirmVisible ? "text" : "password",
+      isRequired: true,
+      endicons: (
+        <IconButton
+          tabIndex={-1}
+          colorScheme={"black"}
+          size="xs"
+          variant="link"
+          aria-label="password-control"
+          onClick={onToggleConfirmVisibility}
+          icon={confirmVisible ? <BsEyeSlash /> : <BsEye />}
+        />
+      )
+    }
+  ];
   const navigate = useNavigate();
   const { mutateAsync, isPending } = useRegisterUser();
-
+  const passwordSchema = z
+    .string()
+    .regex(
+      /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/,
+      "Password must be at least 8 characters long, include one uppercase letter, one lowercase letter, one number, and one special character"
+    );
   const RegisterSchema = z
     .object({
       first_name: z.string().min(3, "Name must be at least 3 characters"),
       middle_name: z.string(),
       last_name: z.string().min(3, "Name must be at least 3 characters"),
       email: z.string().email("Please enter a valid email address"),
-      password: z.string().min(6, "Password must be at least 6 characters"),
-      confirm_password: z
-        .string()
-        .min(6, "Password must be at least 6 characters")
+      password: passwordSchema,
+      confirm_password: passwordSchema
     })
     .refine(data => data.password === data.confirm_password, {
       message: "Passwords do not match",
@@ -168,6 +200,7 @@ function Register() {
                         control={control}
                         type={input.type}
                         isRequired={input.isRequired}
+                        endIcons={input.endicons}
                       />
                     ))}
                   </Stack>

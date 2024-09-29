@@ -6,23 +6,40 @@ export interface ClassResponse {
   id: number;
   title: string;
   description: string;
-  startTime: string;
-  endTime: string;
-  course: Course;
-  tutor: Tutor;
+  courseId: number;
+  createdBy: number;
   startDate: string;
   endDate: string;
+  startTime: string;
+  endTime: string;
+  isActive: boolean;
+  joinedUser: number;
   classLink: string;
+  price: number;
+  createdAt: string;
+  updatedAt: string;
+  course: Course;
+  user: User;
 }
 
-export interface Tutor {
+export interface User {
   id: number;
   first_name: string;
   middle_name: string;
   last_name: string;
-  userprofile: Userprofile;
+  email: string;
+  password: string;
+  isAdmin: boolean;
+  isUser: boolean;
+  isActive: boolean;
+  createdAt: string;
+  updatedAt: string;
 }
 
+export interface Course {
+  id: number;
+  title: string;
+}
 export interface Userprofile {
   profilePicture: string;
   phoneNumber: string;
