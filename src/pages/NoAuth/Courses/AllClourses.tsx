@@ -1,4 +1,11 @@
-import { Button, HStack, SimpleGrid, Stack, Text } from "@chakra-ui/react";
+import {
+  Button,
+  HStack,
+  Input,
+  SimpleGrid,
+  Stack,
+  Text
+} from "@chakra-ui/react";
 import CourseCard from "@shikshak/components/Common/CourseCard";
 import { NAVIGATION_ROUTES } from "@shikshak/pages/App/navigationRoutes";
 import { useAuthentication } from "@shikshak/services/service-auth";
@@ -7,24 +14,30 @@ import {
   useGetTopCourses,
   useUpdateCourseClicks
 } from "@shikshak/services/service-course";
+import { colorScheme } from "@shikshak/theme/colorScheme";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 
 const AllCourses = () => {
-  const { data: courseData } = useGetAllCourses();
   const { data: isAuthenticated } = useAuthentication();
   const { data: topCourses } = useGetTopCourses();
-  const [perPage, setPerPage] = useState(10);
   const navigate = useNavigate();
   const [courseId, setCourseId] = useState<number | null>(null);
   const { refetch } = useUpdateCourseClicks(courseId);
-
+  const [searcnPram, setSearchParam] = useState<string | null>(null);
+  const { data: courseData, refetch: refetchCourses } =
+    useGetAllCourses(searcnPram);
+  const [perPage, setPerPage] = useState(10);
   const handleClick = async () => {
     try {
       await refetch();
     } catch (e) {
       console.error(e);
     }
+  };
+
+  const handleSearchCourse = async () => {
+    await refetchCourses();
   };
 
   return (
@@ -90,6 +103,16 @@ const AllCourses = () => {
         <Text fontWeight={"bold"} fontSize={"24px"}>
           Our Courses
         </Text>
+      </HStack>
+      <HStack width={"30%"}>
+        <Input
+          placeholder="Search Courses"
+          name="search"
+          type="text"
+          onChange={e => setSearchParam(e.target.value)}
+          borderColor={colorScheme.primary_100}
+        />
+        <Button onClick={handleSearchCourse}>Search</Button>
       </HStack>
       <SimpleGrid
         columns={{

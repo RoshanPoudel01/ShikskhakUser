@@ -17,6 +17,7 @@ import {
 import { zodResolver } from "@hookform/resolvers/zod";
 import { imageAssets } from "@shikshak/assets/images";
 import TextInput from "@shikshak/components/Form/TextInput";
+import { NAVIGATION_ROUTES } from "@shikshak/pages/App/navigationRoutes";
 import { useRegisterUser } from "@shikshak/services/service-register";
 import { useForm } from "react-hook-form";
 import { BsEye, BsEyeSlash } from "react-icons/bs";
@@ -134,10 +135,10 @@ function Register() {
         ...data,
         isUser: true
       });
+      navigate(NAVIGATION_ROUTES.LOGIN);
     } catch (e) {
       console.error(e);
     }
-    navigate("/");
   };
 
   return (

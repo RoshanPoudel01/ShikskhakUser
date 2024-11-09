@@ -15,7 +15,8 @@ export const api = {
   course: {
     getAllCourses: "/getCourses",
     clickCourse: "/updateCourseClicks/id={id}",
-    topCourses: "/topCourses"
+    topCourses: "/topCourses",
+    searchCourses: "/searchCourses?title={title}"
   },
   recommendations: "/recommendations",
   payment: "/create-checkout-session"

@@ -144,6 +144,7 @@ const EditProfile = ({ setFlag }: EditProfileProps) => {
             name="email"
             control={control}
             type="email"
+            isDisabled
           />
 
           <TextInput

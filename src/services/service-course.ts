@@ -136,16 +136,21 @@ export interface Course {
   id: number;
   title: string;
 }
-const getAllCourses = () => {
+const getAllCourses = (title: string | null) => () => {
   return ShikshakClient.get<ShikshakResponse<ICourseResponse[]>>(
-    api.course.getAllCourses
+    api.course.getAllCourses,
+    {
+      params: {
+        title
+      }
+    }
   );
 };
 
-const useGetAllCourses = () => {
+const useGetAllCourses = (title: string | null) => {
   return useQuery({
     queryKey: [api.course.getAllCourses],
-    queryFn: getAllCourses,
+    queryFn: getAllCourses(title),
     select: response => response.data.data
   });
 };
@@ -185,6 +190,7 @@ const useGetRecommendedCourses = () => {
     queryFn: getRecommendedCourses
   });
 };
+
 export {
   useGetAllCourses,
   useGetRecommendedCourses,

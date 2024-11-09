@@ -10,10 +10,12 @@ import {
   GridItem,
   HStack,
   Heading,
+  IconButton,
   Image,
   SimpleGrid,
   Stack,
-  Text
+  Text,
+  useDisclosure
 } from "@chakra-ui/react";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { imageAssets } from "@shikshak/assets/images";
@@ -22,6 +24,7 @@ import TextInput from "@shikshak/components/Form/TextInput";
 import { useLoginMutation } from "@shikshak/services/service-auth";
 
 import { useForm } from "react-hook-form";
+import { BsEye, BsEyeSlash } from "react-icons/bs";
 import { Link, useNavigate } from "react-router-dom";
 import z from "zod";
 
@@ -30,6 +33,8 @@ const defaultValues = {
   password: ""
 };
 function LoginPage() {
+  const { isOpen: confirmVisible, onToggle: onToggleConfirmVisibility } =
+    useDisclosure();
   const { mutateAsync, isPending } = useLoginMutation();
   const navigate = useNavigate();
   const LoginSchema = z.object({
@@ -118,10 +123,21 @@ function LoginPage() {
                       <TextInput
                         label="Password"
                         name={"password"}
-                        type="password"
+                        type={confirmVisible ? "text" : "password"}
                         control={control}
                         startIcon={<LockIcon />}
                         isRequired
+                        endIcons={
+                          <IconButton
+                            tabIndex={-1}
+                            colorScheme={"black"}
+                            size="xs"
+                            variant="link"
+                            aria-label="password-control"
+                            onClick={onToggleConfirmVisibility}
+                            icon={confirmVisible ? <BsEyeSlash /> : <BsEye />}
+                          />
+                        }
                       />
                     </Stack>
                     <HStack
@@ -137,16 +153,6 @@ function LoginPage() {
                           Remember me
                         </Text>
                       </Checkbox>
-                      <ChakraLink
-                        as={Link}
-                        size={"lg"}
-                        to="/reset-password"
-                        color={"primary.500"}
-                        mt={2}
-                        fontSize={{ base: "14px", sm: "16px" }}
-                      >
-                        Forgot Password?
-                      </ChakraLink>
                     </HStack>
                     <Button
                       type="submit"

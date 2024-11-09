@@ -115,16 +115,10 @@ const AllClasses = () => {
                 </Heading>
               </Flex>
             )}
-
-            {/* Footer */}
-            {/* Uncomment and customize footer if needed */}
-            {/* <Box bg="teal.500" color="white" py={4} textAlign="center">
-      <Text>&copy; 2023 Class Management System</Text>
-    </Box> */}
           </Flex>
           <ConfirmationModal
             title="Are you sure you want to join the class?"
-            message="You are joining this class"
+            message="You are joining the class of the tutor"
             buttonText="Okay"
             // isLoading={isJoining}
             isOpen={isConfirmationModalOpen}
